@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @author Simona
  *
  */
-public class Voto {
+public class Voto implements Comparable<Voto>{
 	private String corso;
 	private int voto;
 	private LocalDate data;
@@ -99,4 +99,11 @@ public class Voto {
 		return v;
 	}
 
+	@Override
+	public int compareTo(Voto o) {
+		
+		return this.corso.compareTo(o.getCorso());
+	}
+
+	
 }

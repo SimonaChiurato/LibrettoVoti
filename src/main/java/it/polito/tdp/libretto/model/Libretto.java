@@ -13,6 +13,25 @@ public class Libretto {
 	private List<Voto> voti = new ArrayList<>();
 
 	/**
+	 * crea un Libretto nuovo (e vuoto)
+	 */
+	public Libretto() {
+		super();
+	}
+
+	/**
+	 * Copy constructor "Shallow" (copia superficiale) gli oggetti Voto sono
+	 * condivisi tra i libretti creati in questo modo
+	 * 
+	 * @param lib
+	 */
+	public Libretto(Libretto lib) {
+		super();
+		this.voti.addAll(lib.voti);
+
+	}
+
+	/**
 	 * Aggiunge nuovo voto al libretto
 	 * 
 	 * @param v
@@ -131,9 +150,10 @@ public class Libretto {
 	public Libretto creaLibrettoMigliorato() {
 		Libretto nuovo = new Libretto();
 		for (Voto v : this.voti) {
-			//Voto v2 = v; SBAGLIATO!! PERCHè MODIFICO SEMPRE LO STESSO OGGETTO E NON UN'ALTRO
-		//	Voto v2= new Voto(v.getCorso(),v.getVoto(),v.getData()); NOPE!!!!!
-			Voto v2= new Voto(v);
+			// Voto v2 = v; SBAGLIATO!! PERCHè MODIFICO SEMPRE LO STESSO OGGETTO E NON
+			// UN'ALTRO
+			// Voto v2= new Voto(v.getCorso(),v.getVoto(),v.getData()); NOPE!!!!!
+			Voto v2 = new Voto(v);
 			if (v2.getVoto() >= 24) {
 				v2.setVoto(v2.getVoto() + 2);
 				if (v2.getVoto() >= 30) {
@@ -148,4 +168,35 @@ public class Libretto {
 
 	}
 
+	/**
+	 * riordina i voti presenti nel libretto corrente alfabeticamente per corso
+	 */
+	public void ordinaPerCorso() {
+		Collections.sort(this.voti);
+	}
+
+	/**
+	 * riordina i voti presenti nel libretto corrente per voto
+	 */
+	public void ordinaPerVoto() {
+		Collections.sort(this.voti, new ComparatorVotiPerValutazione());
+	}
+
+	/**
+	 * elimina dal libretto i voti <24
+	 */
+	public void cancellaVotiScarsi() {
+		List<Voto> daRimuovere= new ArrayList<>();
+		for (Voto v : this.voti) {
+			if (v.getVoto() < 24) {
+				daRimuovere.add(v);
+			}
+		}
+		this.voti.removeAll(daRimuovere);
+	/*	for(Voto v: daRimuovere) {
+			this.voti.remove(v);
+		}*/
+	}
+	
+	
 }

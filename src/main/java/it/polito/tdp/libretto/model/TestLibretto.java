@@ -34,10 +34,26 @@ public class TestLibretto {
 		//7.creare un libretto "migliorato" in cui ciascun voto maggiore o uguale di 18 viene incrementato di 1 punto, 
 		//e ciascun voto maggiore o ugale di 24 viene incrementato di 2 punti (senza superare il 30). Tenereseparatidue libretti, 
 		//e stamparli _entrambi_.
+		
 		Libretto migliorato= lib.creaLibrettoMigliorato();
 		System.out.println("Miglioramento del libretto");
 		System.out.println("Prima:\n"+lib);
 		System.out.println("Dopo:\n"+migliorato);
+		
+		//8.stampare il libretto in ordine alfabetico di esame, ed in ordine numerico decrescente di voto
+		Libretto alfabetico= new Libretto(lib);
+		alfabetico.ordinaPerCorso();
+		System.out.println(alfabetico);
+		
+		Libretto ordineVoti= new Libretto(lib);
+		ordineVoti.ordinaPerVoto();
+		System.out.println(ordineVoti);
+		
+		//9.cancellare dal libretto tutti i voti inferiori a 24
+		
+		Libretto senzaVotiScarsi= new Libretto(lib);
+		senzaVotiScarsi.cancellaVotiScarsi();
+		System.out.println(senzaVotiScarsi);
 	}
 
 	public static void main(String[] args) {
